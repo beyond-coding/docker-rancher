@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  caddy:
+    restart: always
+    image: abiosoft/caddy
+    depends_on:
+    - rancher # Ensures that caddy will relink if the other container is restarted
+    ports:
+    - 80:80
+    - 443:443
+    volumes:
+    - ./caddy/Caddyfile:/etc/Caddyfile
+    - ./caddy/certificates:/root/.caddy # Your certificates will be stored here
+    - ./caddy/logs:/var/log/caddy:Z # Caddy logs will be stored here
+
+  rancher:
+    restart: always
+    image: rancher/server
+    volumes:
+    - rancher-data:/var/lib/mysql
+
+volumes:
+  rancher-data:

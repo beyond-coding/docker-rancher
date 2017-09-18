@@ -1,0 +1,21 @@
+--- Run the applications ---
+
+wget https://raw.githubusercontent.com/beyond-coding/docker-rancher/master/docker-rancher.sh && sh docker-rancher.sh
+
+---- terminal docker commands
+
+docker run -d \
+    -v ~/caddy/Caddyfile:/etc/Caddyfile \
+    -v ~/caddy/certificates:/root/.caddy \
+    -v ~/caddy/srv:/srv \
+    -p 80:80 -p 443:443 \
+    --restart=unless-stopped \
+    --name caddy \
+    --link nexus:nexus \
+    abiosoft/caddy
+
+PORT=80
+DOCKER_FOLDER=~/dockerdata/rancher
+
+mkdir -p $DOCKER_FOLDER
+sudo docker run -d -v $DOCKER_FOLDER:/var/lib/mysql --restart=unless-stopped -p $PORT:8080 --name rancher rancher/server

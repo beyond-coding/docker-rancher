@@ -1,0 +1,23 @@
+nexus.beyond-coding.com {
+    tls guillermo.herrero@beyond-coding.com
+
+    proxy / http://172.18.0.2:8081 {
+        fail_timeout 0s
+        transparent
+    }
+
+    log stdout
+    errors stdout
+}
+
+registry.beyond-coding.com {
+
+    proxy / http://172.18.0.2:5000 {
+        fail_timeout 0s
+        websocket
+        transparent
+    }
+
+    log stdout
+    errors stdout
+}
