@@ -11,9 +11,9 @@ services:
     - 443:443
     - 2015:2015
     environment:
-     -ACME_AGREE=true
-     -PHP_FCGI_CHILDREN=3
-     -PHP_FCGI_MAX_REQUESTS=128
+    - ACME_AGREE=true
+    - PHP_FCGI_CHILDREN=3
+    - PHP_FCGI_MAX_REQUESTS=128
     volumes:
     - ./caddy/Caddyfile:/etc/Caddyfile
     - ./caddy/certificates:/root/.caddy # Your certificates will be stored here
